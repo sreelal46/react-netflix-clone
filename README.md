@@ -11,7 +11,7 @@ This project replicates core features of Netflix such as movie browsing, trailer
 - 🎞 **Browse Movies & TV Shows** – Data fetched from TMDB API
 - 📺 **Trailer Playback** – Integrated with YouTube player
 - ❤️ **My List** – Save your favorite movies/shows
-- 🌐 **Responsive UI** – Works on desktop & mobile
+- 🌐 **Responsive UI** – Works on desktop only
 - 🎨 **Smooth Animations** – Powered by Framer Motion
 
 ---
