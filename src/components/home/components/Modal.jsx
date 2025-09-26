@@ -147,7 +147,17 @@ export default function Modal({
                   opts={{
                     height: "100%",
                     width: "100%",
-                    playerVars: { autoplay: 1, mute: 1 },
+                    playerVars: {
+                      autoplay: 1,
+                      mute: 0,
+                      controls: 0,
+                      modestbranding: 1,
+                      rel: 0,
+                      loop: 1,
+                      playlist: urlId, // Needed for loop to work
+                      iv_load_policy: 3,
+                      playsinline: 1,
+                    },
                   }}
                   className="w-full h-full rounded-t-lg"
                 />

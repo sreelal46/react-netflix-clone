@@ -40,7 +40,7 @@ This project replicates core features of Netflix such as movie browsing, trailer
 ## 🚀 Deployment
 
 You can access the live deployed app here:
-[https://react-netflix-clone-puce.vercel.app/]
+https://react-netflix-clone-puce.vercel.app/
 
 ---
 
