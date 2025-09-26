@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Roboto", sans-serif; /* fallback to sans-serif */
+}
+
+html {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  @apply font-sans text-white bg-[#141414];
+}
+
+.navbar {
+  @apply bg-gradient-to-b from-black/70 to-transparent flex justify-between items-center px-12 py-4 text-white absolute top-0 left-0 w-full;
+}
+
+/* App.css or global.css */
+
+/* Play button: white with black text */
+.btn-play {
+  @apply flex items-center bg-white text-black px-12 py-3 rounded font-bold hover:bg-gray-300 transition;
+}
+
+/* Info button: dark semi-transparent with white text */
+.btn-info {
+  @apply flex items-center bg-gray-700 bg-opacity-70 text-white px-12 py-3 rounded font-bold hover:bg-gray-600 transition;
+}
+
+.container-card {
+  scroll-behavior: smooth;
+}
+
+.container-card::-webkit-scrollbar {
+  display: none;
+}
