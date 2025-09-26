@@ -33,8 +33,8 @@ This project replicates core features of Netflix such as movie browsing, trailer
 
 Clone the repository
 
-git clone https://github.com/sreelal46/react-netflix-clone.git
-cd react-netflix-clone
+- git clone https://github.com/sreelal46/react-netflix-clone.git
+- cd react-netflix-clone
 
 Install dependencies
 
