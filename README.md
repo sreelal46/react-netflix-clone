@@ -54,11 +54,11 @@ npm run dev
 
 ### Home Page
 
-![Home Page](../netflix-clone/screenshort/home.png)
+![Home Page](screenshort/home.png)
 
 ### Login Page
 
-![Login Page](../netflix-clone/screenshort/login.png)
+![Login Page](screenshort/login.png)
 
 ---
 
