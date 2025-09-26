@@ -1,5 +1,13 @@
 # 🎬 React Netflix Clone
 
+### Home Page
+
+![Home Page](screenshort/home.png)
+
+### Login Page
+
+![Login Page](screenshort/login.png)
+
 A Netflix-inspired web application built with **React**, **Firebase**, and **TMDB API**.  
 This project replicates core features of Netflix such as movie browsing, trailers, authentication, and personalized lists.
 
@@ -47,18 +55,6 @@ VITE_TMDB_API_KEY=your_tmdb_api_key
 Run the app locally
 
 npm run dev
-
----
-
-## 📸 Screenshots
-
-### Home Page
-
-![Home Page](screenshort/home.png)
-
-### Login Page
-
-![Login Page](screenshort/login.png)
 
 ---
 
