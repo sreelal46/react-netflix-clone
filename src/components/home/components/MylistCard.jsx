@@ -1,29 +1,44 @@
-import React from "react";
-import { collection, getDocs } from "firebase/firestore";
+import React, { useState, useEffect } from "react";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../firebase/config";
-import { useState, useEffect } from "react";
 import Modal from "./Modal";
 import tmdb from "../../../axios";
 import { API_key } from "../../../constant";
+import { getAuth } from "firebase/auth";
 
 export function MylistCard() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const [movieTitle, setMovieTitle] = useState("");
-
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [urlId, setUrlId] = useState(null);
   const [moviesId, setMoviesId] = useState(null);
 
+  const auth = getAuth();
+
   useEffect(() => {
     const fetchMovies = async () => {
+      const user = auth.currentUser;
+      if (!user) {
+        console.log("User not logged in");
+        setLoading(false);
+        return;
+      }
+
       try {
-        const querySnapshot = await getDocs(collection(db, "my_list"));
+        // Query movies only for the current user
+        const q = query(
+          collection(db, "my_list"),
+          where("userId", "==", user.uid)
+        );
+
+        const querySnapshot = await getDocs(q);
         const moviesArray = querySnapshot.docs.map((doc) => ({
           id: doc.id, // Firestore document id
           ...doc.data(), // All movie fields
         }));
+
         setMovies(moviesArray);
         setLoading(false);
       } catch (error) {
@@ -33,7 +48,7 @@ export function MylistCard() {
     };
 
     fetchMovies();
-  }, []);
+  }, [auth.currentUser]);
 
   const getMovieTrailer = async (movie) => {
     try {
@@ -67,7 +82,9 @@ export function MylistCard() {
         <h1 className="text-white text-2xl mb-4">My List</h1>
 
         <div className="container-card flex space-x-4 overflow-x-auto scrollbar-hide relative">
-          {movies.length > 0 ? (
+          {loading ? (
+            <p className="text-white">Loading...</p>
+          ) : movies.length > 0 ? (
             movies.map((movie) => (
               <div
                 key={movie.id}
@@ -115,6 +132,7 @@ export function MylistCard() {
           )}
         </div>
       </div>
+
       {showModal && selectedMovie && (
         <Modal
           movieTitle={movieTitle}

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart, FaPlay } from "react-icons/fa";
 import YouTube from "react-youtube";
 import tmdb from "../../../axios";
 import {
@@ -8,7 +7,6 @@ import {
   addDoc,
   deleteDoc,
   doc,
-  getDoc,
   query,
   where,
   getDocs,
@@ -18,7 +16,7 @@ import { API_key, posterURL } from "../../../constant";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { IoAdd } from "react-icons/io5";
 import { CiBookmarkCheck } from "react-icons/ci";
-import { FaPlay } from "react-icons/fa";
+import { getAuth } from "firebase/auth";
 
 export default function Modal({
   movieTitle,
@@ -33,6 +31,8 @@ export default function Modal({
   const [docId, setDocId] = useState(null);
   const [heart, setHeart] = useState(false);
   const [show, setShow] = useState("");
+
+  const auth = getAuth();
 
   //  Fetch cast for the selected movie
   useEffect(() => {
@@ -57,13 +57,23 @@ export default function Modal({
     if (!selectedMovie) return;
     const showType = selectedMovie.title ? "movie" : "tv";
     setShow(showType);
+
+    const user = auth.currentUser;
+    if (!user) {
+      console.log("User not logged in");
+      return;
+    }
+    const userId = user.uid;
+
     try {
-      // Check if this movie already exists in Firestore by movieId
+      // Check if this movie already exists in Firestore for this user
       const q = query(
         collection(db, "my_list"),
-        where("movieId", "==", moviesId)
+        where("movieId", "==", moviesId),
+        where("userId", "==", userId)
       );
       const querySnap = await getDocs(q);
+
       if (!querySnap.empty) {
         // Already exists → use its docId
         const existingDoc = querySnap.docs[0];
@@ -72,7 +82,9 @@ export default function Modal({
         return;
       }
 
-      const doc = await addDoc(collection(db, "my_list"), {
+      // Add new movie for this user
+      const docRef = await addDoc(collection(db, "my_list"), {
+        userId: userId,
         movieId: moviesId,
         title: movieTitle,
         overview: selectedMovie.overview || "",
@@ -85,16 +97,17 @@ export default function Modal({
         adult: selectedMovie.adult || false,
         urlId: urlId || null,
         show: show,
-        createdAt: new Date(), // optional: track when added
+        createdAt: new Date(),
       });
-      setDocId(doc.id);
+
+      setDocId(docRef.id);
       setChangeButton(true);
     } catch (error) {
       console.error("Error adding movie:", error);
     }
   };
 
-  //delete movie from firebase
+  // Delete movie from Firestore
   const handleDelete = async () => {
     if (!docId) return;
     try {
@@ -157,20 +170,19 @@ export default function Modal({
                     onClick={handleDelete}
                     className="flex items-center bg-gray-700 bg-opacity-70 text-white px-5 py-2 rounded font-bold hover:bg-gray-600 transition"
                   >
-                    <CiBookmarkCheck className="text-3xl" />{" "}
-                    {/* Show "Remove" icon */}
+                    <CiBookmarkCheck className="text-3xl" />
                   </button>
                 ) : (
                   <button
                     onClick={handleCreate}
                     className="flex items-center bg-gray-700 bg-opacity-70 text-white px-5 py-2 rounded font-bold hover:bg-gray-600 transition"
                   >
-                    <IoAdd className="text-3xl" /> {/* Show "Add" icon */}
+                    <IoAdd className="text-3xl" />
                   </button>
                 )}
 
                 <button
-                  onClick={() => setHeart(true)}
+                  onClick={() => setHeart(!heart)}
                   className="flex items-center bg-gray-700 bg-opacity-70 text-white px-5 py-2 rounded font-bold hover:bg-gray-600 transition"
                 >
                   {heart ? (
