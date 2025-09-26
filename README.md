@@ -1,12 +1,86 @@
-# React + Vite
+# 🎬 React Netflix Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Netflix-inspired web application built with **React**, **Firebase**, and **TMDB API**.  
+This project replicates core features of Netflix such as movie browsing, trailers, authentication, and personalized lists.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- 🔐 **Authentication** – Login & Signup with Firebase Auth
+- 🎞 **Browse Movies & TV Shows** – Data fetched from TMDB API
+- 📺 **Trailer Playback** – Integrated with YouTube player
+- ❤️ **My List** – Save your favorite movies/shows
+- 🌐 **Responsive UI** – Works on desktop & mobile
+- 🎨 **Smooth Animations** – Powered by Framer Motion
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+- **React 19** – UI library
+- **React Router 7** – Navigation & routing
+- **Firebase 12** – Authentication & hosting
+- **Axios** – API calls
+- **Framer Motion** – Animations
+- **React Icons** – Icons
+- **TMDB API** – Movie & TV data
+- **React YouTube** – Trailer embedding
+
+---
+
+## ⚙️ Setup & Installation
+
+Clone the repository
+
+git clone https://github.com/sreelal46/react-netflix-clone.git
+cd react-netflix-clone
+
+Install dependencies
+
+**npm install**
+
+Create .env file in the root directory:
+
+VITE_TMDB_API_KEY=your_tmdb_api_key
+
+Run the app locally
+
+npm run dev
+
+---
+
+## 📸 Screenshots
+
+### Home Page
+
+![Home Page](../netflix-clone/screenshort/home.png)
+
+### Login Page
+
+![Login Page](../netflix-clone/screenshort/login.png)
+
+---
+
+## 🙌 Acknowledgements
+
+**TMDB API**
+for movie & TV data
+
+**Firebase**
+for authentication & hosting
+
+**Inspired by Netflix UI**
+
+---
+
+## 📜 License
+
+This project is for educational purposes only.
+Not affiliated with Netflix or TMDB.
+
+---
+
+```
+
+```
