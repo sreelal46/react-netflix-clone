@@ -37,6 +37,13 @@ This project replicates core features of Netflix such as movie browsing, trailer
 
 ---
 
+## 🚀 Deployment
+
+You can access the live deployed app here:
+[Add your deployment URL here]
+
+---
+
 ## ⚙️ Setup & Installation
 
 Clone the repository
